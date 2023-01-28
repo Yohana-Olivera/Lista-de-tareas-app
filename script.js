@@ -25,7 +25,9 @@ console.log(btn);
 
 //dejando el codigo mas limpio
 
-( () => {
+import checkComplete from './components/checkComplete.js';
+import deleteIcon from './components/deleteIcon.js';
+
 const btn = document.querySelector('[data-form-btn]');
 
 const createTask = (evento) => {
@@ -35,7 +37,7 @@ const createTask = (evento) => {
 	const list = document.querySelector('[data-list]');
 	const task = document.createElement('li');
 	task.classList.add('card') 			//agrega al elemento li creado anteriormente la clase card
-	input.value = ""; 					//borra lo que se haya escrito en el input
+	input.value = ''; 					//borra lo que se haya escrito en el input
 	
 	const taskContent = document.createElement('div');
 
@@ -44,30 +46,18 @@ const createTask = (evento) => {
 	titleTask.innerText = value;		
 	taskContent.appendChild(checkComplete());
 	taskContent.appendChild(titleTask);
+	
 
-	const content = `
-            <i class="fas fa-trash-alt trashIcon icon"></i>`;
 //  task.innerHTML = content;
     task.appendChild(taskContent);
+    task.appendChild(deleteIcon())
     list.appendChild(task);				//esto agrega al nodo padre el elemento li y los sucesivos li que se creen
 	
 };
 
 btn.addEventListener('click', createTask);
 
-const checkComplete = () => {
-	const i = document.createElement('i');
-	i.classList.add('far', 'fa-check-square', 'icon');
-	i.addEventListener('click', completeTask);
-	return i
-}
+	
 
-//Inmediately invoked function expressio IIFE
-const completeTask = (event) => {
-	const element = event.target;
-	element.classList.toggle("fas");
-	element.classList.toggle("completeIcon");
-	element.classList.toggle("far")
-};
 
-})();
+
